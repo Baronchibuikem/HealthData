@@ -66,34 +66,23 @@ def statistics(request):
     if health != '' and health is not None:
         queryset = queryset.filter(health_challenge__name__icontains=health)
 
+    # for filtering out country
+    country = request.GET.get('country')
+    if country != '' and country is not None:
+        queryset = queryset.filter(country__name__icontains=country)
 
+    # for pagination
+    paginator = Paginator(queryset, 30)
+    page_number = request.GET.get('page', 1)
+    try:
+        page = paginator.page(page_number)
+    except PageNotAnInteger:
+        # If page is not an integer deliver the first page
+        page = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range deliver last page of results
+        page = paginator.page(paginator.num_pages)
 
-    # paginator = Paginator(queryset, 12)
-    # page_number = request.GET.get('page', 1)
-    # try:
-    #     page = paginator.page(page_number)
-    # except PageNotAnInteger:
-    #     # If page is not an integer deliver the first page
-    #     page = paginator.page(1)
-    # except EmptyPage:
-    #     # If page is out of range deliver last page of results
-    #     page = paginator.page(paginator.num_pages)
-    #
-    # context = {'report': page, 'page': page,}
-    context ={"queryset": queryset}
+    context ={"queryset": queryset, 'page': page,}
     template = 'medicalrecord/illstatistics.html'
     return render(request, template, context)
-
-#
-# def search(request, id):
-#     dropdown_hiv = request.GET.get('hiv')
-#     print(dropdown_hiv)
-#     # health = UserMedicalRecord.objects.filter(health_challenge_id=id)
-#     # state = UserMedicalRecord.objects.filter(state_id=id)
-#     # genotype = UserMedicalRecord.objects.filter(genotype=id)
-#     # age = UserMedicalRecord.objects.filter(age=id)
-#     # print(health)
-#     # print(genotype)
-#
-#     template = "medicalrecord/search.html"
-#     return render(request, template,)

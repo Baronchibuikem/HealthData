@@ -1,5 +1,6 @@
 from django.urls import path
-from user.views import heathworkers,index,patients
+from user.views import heathworkers, index, patients
+
 
 app_name = 'user'
 
@@ -12,4 +13,5 @@ urlpatterns = [
 
     # for patient registration
     path('patient/', patients.patient_profile_view, name='patient'),
+
 ]
