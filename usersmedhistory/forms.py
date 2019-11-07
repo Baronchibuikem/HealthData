@@ -1,14 +1,14 @@
 from django import forms
-from .models import UserMedicalRecord, HealthChallenge, Country
+from .models import UserMedicalRecord
+
+
 
 class MedicalRecordForm(forms.ModelForm):
+    """
+    A formfield that is built from the UserMedicalRecord model in our models
+    we all rendering all the fields in the model for a user to fill
+    """
     class Meta:
         model = UserMedicalRecord
-        # fields = ['age','email','phone','diabetic','hiv_infested','ebola',
-        #           'genotype','married','address','state', 'country', 'general']
         fields = "__all__"
 
-class Country(forms.ModelForm):
-    class Meta:
-        model = Country
-        fields = '__all__'

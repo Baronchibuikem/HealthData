@@ -7,7 +7,7 @@
 {% block content %}
 <div class="container mt-5 pt-5">
     <div class="text-center mt-5 pt5">
-        <form method="post" class="col-md-6 mx-auto shadow mb-5 reg">
+        <form method="post" class="col-md-6 mx-auto shadow my-5 reg">
             {% csrf_token %}
             {{ profile_form|crispy }}
             <button type="submit" class="mb-3">Save changes</button>

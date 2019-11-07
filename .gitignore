@@ -1,2 +1,5 @@
+db.sqlite3
 migrations/
-myenv/
+__pycache__
+__pycache__/
+myenv
