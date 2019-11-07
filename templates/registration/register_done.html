@@ -1,0 +1,15 @@
+{% extends "index.html" %}
+{% load staticfiles %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+<div class="container mt-5 pt-5">
+    <div class="row pb">
+        <div class="col mt-5 pt-5 text-center">
+            <h1>Welcome {{ new_user.first_name }}!</h1>
+            <p>Your account has been successfully created. Now you can <a href="{% url 'login' %}">log in</a>.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

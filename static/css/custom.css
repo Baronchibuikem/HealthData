@@ -1,0 +1,16 @@
+#header{
+    min-height: 100vh;
+    background: linear-gradient(rgba(1, 0, 0, 0.5),
+    rgba(0, 0, 0, 0.5)),url(../image/home-banner.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center center;
+}
+
+.banner{
+    margin-top: 400px;
+}
+ul {
+list-style:none !important
+}

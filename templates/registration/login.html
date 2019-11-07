@@ -1,0 +1,47 @@
+{% extends "index.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+
+{% block content %}
+<div class="container text-center mt-5 pt-5">
+  <div class="login-form2">
+    <div class="container text-center">
+        <div class="text-center mt-5">
+
+            <div class="login-form2 shadow col-md-6 mx-auto bg-light">
+                <h4 class="pt-3">LOGIN</h4>
+                <form action="/accounts/login/" method="post" class="w-100">
+                    <div id="div_id_username" class="control-group ">
+                        <label for="id_username" class="control-label requiredField mt-4">
+                            Username<span class="asteriskField">*</span>
+                        </label>
+                        <div class="controls">
+                            <input type="text" name="username" autofocus="" class="textinput textInput w-50" required="" id="id_username">
+                        </div>
+                    </div>
+                    <div id="div_id_password" class="control-group w-100">
+                        <label for="id_password" class="control-label requiredField">
+                            Password<span class="asteriskField">*</span>
+                        </label>
+                        <div class="controls">
+                            <input type="password" name="password" class="textinput textInput w-50" required="" id="id_password">
+                        </div>
+                    </div>
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="/medhistory/">
+                        <p class="pt-3">
+                            <input type="submit" value="Log-in">
+                        </p>
+                </form>
+                <p class="pb-5">
+                    <a href="/">Register</a>
+                </p>
+            </div>
+
+        </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

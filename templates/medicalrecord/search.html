@@ -1,0 +1,91 @@
+<!--{% extends "index.html" %}-->
+<!--{% load crispy_forms_tags %}-->
+<!--{% load staticfiles %}-->
+
+
+<!--{% block content %}-->
+
+
+<!--<div class="container text-center mt-5 pt-5 table-responsive">-->
+
+        <!--<ul>-->
+        <!--{% for role in health %}-->
+        <!--<li>-->
+            <!--<a href="{{ role.get_absolute_url }}">{{ role}}</a>-->
+            <!--{{ role.health_challenge }}-->
+        <!--</li>-->
+        <!--{% endfor %}-->
+    <!--</ul>-->
+
+            <!--&lt;!&ndash;<form method="GET"&ndash;&gt;-->
+                  <!--&lt;!&ndash;class="mb-5 col-md-10 mx-auto shadow font-weight-bold h5 text-uppercase"&ndash;&gt;-->
+                  <!--&lt;!&ndash;data-urlhealth="{% url 'usersmedhistory:stats' %}"&ndash;&gt;-->
+                  <!--&lt;!&ndash;id="myform">&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="form-group my-3 col-md-3">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<label for="health">Health</label>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<select id="health">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<option>Lorem</option>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</select>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="form-group my-3 col-md-3">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<label for="state">State</label>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<select id="state">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<option>lorem</option>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</select>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="form-group my-3 col-md-3">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<label for="genotype">Genotype</label>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<select id="genotype" >&ndash;&gt;-->
+                        <!--&lt;!&ndash;<option>lorem</option>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</select>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;<div class="form-group my-3 col-md-3">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<button class="btn btn-success" type="submit">Filter</button>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;&lt;!&ndash;<div class="btn-group shadow w-100">&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;<button type="button" class="btn btn-secondary dropdown-toggle w-100" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;Filter word&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;</button>&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;<div class="dropdown-menu w-100">&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;<input class="dropdown-item"  name="ebola_exact" placeholder="Ebola"/>Ebola</input>&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;<a class="dropdown-item" href="" name="hiv_exact">HIV</a>&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;<a class="dropdown-item" href="" name="diabetic_exact">Diabetic</a>&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;</div>&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;</div>&ndash;&gt;&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;</form>&ndash;&gt;-->
+    <!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
+            <!--&lt;!&ndash;<h3>Statitics of how different illness are spread across states and Age group</h3>&ndash;&gt;-->
+        <!--&lt;!&ndash;<div class="col-md-9 col-sm-12">&ndash;&gt;-->
+        <!--&lt;!&ndash;<table style="width:100%" class="table table-striped table-bordered ">&ndash;&gt;-->
+              <!--&lt;!&ndash;<tr class="text-uppercase">&ndash;&gt;-->
+                  <!--&lt;!&ndash;<th>ID</th>&ndash;&gt;-->
+                <!--&lt;!&ndash;<th>State</th>&ndash;&gt;-->
+                <!--&lt;!&ndash;<th>Age</th>&ndash;&gt;-->
+                <!--&lt;!&ndash;<th>HIV</th>&ndash;&gt;-->
+                <!--&lt;!&ndash;<th>Diabetics</th>&ndash;&gt;-->
+                <!--&lt;!&ndash;<th>Ebola</th>&ndash;&gt;-->
+              <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+            <!--&lt;!&ndash;{% for record in report %}&ndash;&gt;-->
+                <!--&lt;!&ndash;<tr>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<td>{{ record.id }}</td>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<td>{{ record.state }}</td>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<td>{{ record.age }}</td>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<td>{{ record.hiv }}</td>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<td>{{ record.diabetic }}</td>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<td>{{ record.ebola }}</td>&ndash;&gt;-->
+                <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+        <!--&lt;!&ndash;{% endfor %}&ndash;&gt;-->
+        <!--&lt;!&ndash;</table>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+<!--{% include "includes/pagination.html" %}-->
+<!--</div>-->
+<!--{% endblock content %}-->
+<!--{% block jquery %}-->
+    <!--<script src="{% static 'js/custom.js' %}"></script>-->
+<!--{% endblock %}-->

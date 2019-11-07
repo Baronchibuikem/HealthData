@@ -1,0 +1,24 @@
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+<!-- header background -->
+<header id="header">
+    <div class="container mt-5 pt-5">
+        <div class="banner text-center mt-5 pt-5">
+            {% if request.user.is_authenticated %}
+            <h1 class="text-white"><strong>HEALTH DATA COLLECTION CENTER</strong></h1>
+            <h4 class="pb-3">A health data center which holds data for both Health Practitioners and other Users</h4>
+            {% else %}
+            <h1><strong class="text-white">HEALTH DATA COLLECTION CENTER</strong></h1>
+            <h4 class="pb-3">A health data center which holds data for both Health Practitioners and other Users</h4>
+            <h4>Register as</h4>
+            <div class="btn btn-success mr-5">
+                <a href="{% url 'user:healthworker' %}" class="p-5 text-white"> Health Worker</a>
+            </div>
+            <div class="btn btn-success">
+                <a href="{% url 'user:patient' %}" class="p-5 text-white">Patient</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</header>
