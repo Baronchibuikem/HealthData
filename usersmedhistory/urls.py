@@ -20,4 +20,5 @@ urlpatterns = [
     # this is used for the filter view
     path('search/<id>/', search, name="search"),
 
+
 ]

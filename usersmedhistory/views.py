@@ -1,13 +1,12 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render
 from .models import UserMedicalRecord, HealthChallenge, Country,LocalGovernment, State
 from .forms import MedicalRecordForm
 from django.contrib import messages
-from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from .decorators import healthworker_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
-from .choices import illness_choices
+
+from django.http import HttpResponseRedirect, Http404
 
 
 
@@ -35,19 +34,13 @@ def create_medical_record(request):
     return render(request, template, context)
 
 
-def medical_record_detail(request, id):
-    medical_record = get_object_or_404(UserMedicalRecord, id=id )
-    template = 'medicalrecord/medicalrecordsuccess.html'
-    context = {'records': medical_record}
-    return render(request, template, context)
-
-
-
-@healthworker_required
 def medial_history(request):
     """
-    this view returns a list of all the records stored in the userMedicalRecord database
+    this view returns a list of all the records stored in the userMedicalRecord database,
+    un-authenticated users or patient users doesn't have access to its content.
     """
+    if request.user.is_anonymous or request.user.is_patient:
+        return render(request, "medicalrecord/permission_denied.html")
     object = UserMedicalRecord.objects.all()
     context = {'records': object}
     template = "medicalrecord/medicalhistory.html"
@@ -70,11 +63,6 @@ def statistics(request):
     context = {'report': page, 'page': page,}
     template = 'medicalrecord/illstatistics.html'
     return render(request, template, context)
-
-
-def access_denied(request):
-    template = "medicalrecord/permission_denied.html"
-    return render(request, template, {})
 
 
 def search(request, id):
