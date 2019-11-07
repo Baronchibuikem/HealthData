@@ -72,7 +72,7 @@ class UserMedicalRecord(models.Model):
     health_challenge = models.ForeignKey(HealthChallenge, on_delete=models.CASCADE)
     married = models.BooleanField(default=False)
     children = models.IntegerField()
-    wife = models.IntegerField
+    wife = models.IntegerField(blank=True, null=True)
     address = models.CharField(max_length=250)
     genotype = models.CharField(max_length=2, choices=user_choices)
     date = models.DateField(auto_now_add=True)

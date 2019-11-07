@@ -26,7 +26,7 @@ def create_medical_record(request):
         instance.user = request.user
         instance.save()
         messages.success(request, "Successfully Created")
-        return HttpResponseRedirect(instance.get_absolute_url())
+        return render(request, "medicalrecord/success.html")
     else:
         form = MedicalRecordForm()
     template = 'medicalrecord/medicalform.html'
@@ -48,30 +48,52 @@ def medial_history(request):
 
 
 def statistics(request):
-    queryset= UserMedicalRecord.objects.all()
-    paginator = Paginator(queryset, 12)
-    page_number = request.GET.get('page', 1)
-    try:
-        page = paginator.page(page_number)
-    except PageNotAnInteger:
-        # If page is not an integer deliver the first page
-        page = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range deliver last page of results
-        page = paginator.page(paginator.num_pages)
+    queryset = UserMedicalRecord.objects.all()
 
-    context = {'report': page, 'page': page,}
+    # For filtering out genotypes
+    genotype = request.GET.get('genotype')
+    if genotype != '' and genotype is not None:
+        queryset = queryset.filter(genotype__icontains=genotype)
+
+
+    # For filtering out states
+    state = request.GET.get('state')
+    if state != '' and state is not None:
+        queryset = queryset.filter(state__name__icontains=state)
+
+    # for filtering out health challenges
+    health = request.GET.get('health')
+    if health != '' and health is not None:
+        queryset = queryset.filter(health_challenge__name__icontains=health)
+
+
+
+    # paginator = Paginator(queryset, 12)
+    # page_number = request.GET.get('page', 1)
+    # try:
+    #     page = paginator.page(page_number)
+    # except PageNotAnInteger:
+    #     # If page is not an integer deliver the first page
+    #     page = paginator.page(1)
+    # except EmptyPage:
+    #     # If page is out of range deliver last page of results
+    #     page = paginator.page(paginator.num_pages)
+    #
+    # context = {'report': page, 'page': page,}
+    context ={"queryset": queryset}
     template = 'medicalrecord/illstatistics.html'
     return render(request, template, context)
 
-
-def search(request, id):
-    health = UserMedicalRecord.objects.filter(health_challenge_id=id)
-    state = UserMedicalRecord.objects.filter(state_id=id)
-    genotype = UserMedicalRecord.objects.filter(genotype=id)
-    age = UserMedicalRecord.objects.filter(age=id)
-    print(health)
-    print(genotype)
-
-    template = "medicalrecord/search.html"
-    return render(request, template,)
+#
+# def search(request, id):
+#     dropdown_hiv = request.GET.get('hiv')
+#     print(dropdown_hiv)
+#     # health = UserMedicalRecord.objects.filter(health_challenge_id=id)
+#     # state = UserMedicalRecord.objects.filter(state_id=id)
+#     # genotype = UserMedicalRecord.objects.filter(genotype=id)
+#     # age = UserMedicalRecord.objects.filter(age=id)
+#     # print(health)
+#     # print(genotype)
+#
+#     template = "medicalrecord/search.html"
+#     return render(request, template,)

@@ -1,82 +1,109 @@
-<!--{% extends "index.html" %}-->
-<!--{% load crispy_forms_tags %}-->
-<!--{% load staticfiles %}-->
+{% extends "index.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
 
 
-<!--{% block content %}-->
+{% block content %}
 
 
-<!--<div class="container text-center mt-5 pt-5 table-responsive">-->
+<div class="container text-center mt-5 pt-5 table-responsive">
 
-            <!--<form method="GET"-->
-                  <!--class="mb-5 col-md-10 mx-auto shadow font-weight-bold h5 text-uppercase"-->
-                  <!--data-urlhealth="{% url 'usersmedhistory:stats' %}"-->
-                  <!--id="myform">-->
-                <!--<div class="row">-->
-                <!--<div class="form-group my-3 col-md-3">-->
-                    <!--<label for="health">Health</label>-->
-                    <!--<select id="health">-->
-                        <!--<option>Lorem</option>-->
-                    <!--</select>-->
-                <!--</div>-->
-                <!--<div class="form-group my-3 col-md-3">-->
-                    <!--<label for="state">State</label>-->
-                    <!--<select id="state">-->
-                        <!--<option>lorem</option>-->
-                    <!--</select>-->
-                <!--</div>-->
+            <form method="GET"
+                  class="mb-5 col-md-10 mx-auto shadow font-weight-bold h5 text-uppercase"
+                 >
+                <div class="row">
+                    <!--For filtering out genotypes-->
+                <div class="form-group my-3 col-md-3">
+                    <label for="genotype">Genotype</label>
+                    <select id="genotype" name="genotype">
+                        <option name=""></option>
+                        <option name="AA">AA</option>
+                        <option name="AS">AS</option>
+                        <option name="SS">SS</option>
+                    </select>
+                </div>
+
+                    <!--For filtering users based on stat-->
+                <div class="form-group my-3 col-md-3">
+                    <label for="state">State</label>
+                    <select id="state" name="state">
+                        <option name=""></option>
+                        <option name="Imo">Imo</option>
+                        <option name="Anambra">Anambra</option>
+                        <option name="Unata">Unata</option>
+                    </select>
+                </div>
+
+                    <!--For filtering users based on their health challenges-->
+                <div class="form-group my-3 col-md-3">
+                    <label for="health">Health</label>
+                    <select id="health" name="health">
+                        <option name=""></option>
+                        <option name="Malaria">Malaria</option>
+                        <option name="Cancer">Cancer</option>
+                        <option name="HIV">HIV</option>
+                        <option name="Ebola">Ebola</option>
+                        <option name="Low BP">Low BP</option>
+                        <option name="High BP">High BP</option>
+                        <option name="Diabetic">Diabetics</option>
+
+                    </select>
+                </div>
+
+
                 <!--<div class="form-group my-3 col-md-3">-->
                     <!--<label for="genotype">Genotype</label>-->
-                    <!--<select id="genotype" >-->
-                        <!--<option>lorem</option>-->
+                    <!--<select id="genotype" name="genotype">-->
+                        <!--<option name="aa">AA</option>-->
+                        <!--<option name="as">AS</option>-->
+                        <!--<option name="ss">SS</option>-->
                     <!--</select>-->
                 <!--</div>-->
 
-                    <!--<div class="form-group my-3 col-md-3">-->
-                        <!--<button class="btn btn-success" type="submit">Filter</button>-->
-                    <!--</div>-->
-            <!--&lt;!&ndash;<div class="btn-group shadow w-100">&ndash;&gt;-->
-                    <!--&lt;!&ndash;<button type="button" class="btn btn-secondary dropdown-toggle w-100" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&ndash;&gt;-->
-                        <!--&lt;!&ndash;Filter word&ndash;&gt;-->
-                    <!--&lt;!&ndash;</button>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<div class="dropdown-menu w-100">&ndash;&gt;-->
-                        <!--&lt;!&ndash;<input class="dropdown-item"  name="ebola_exact" placeholder="Ebola"/>Ebola</input>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<a class="dropdown-item" href="" name="hiv_exact">HIV</a>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<a class="dropdown-item" href="" name="diabetic_exact">Diabetic</a>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                <!--&lt;!&ndash;</div>&ndash;&gt;-->
-        <!--</div>-->
-            <!--</form>-->
-    <!--<div class="row">-->
-            <!--<h3>Statitics of how different illness are spread across states and Age group</h3>-->
-        <!--<div class="col-md-9 col-sm-12">-->
-        <!--<table style="width:100%" class="table table-striped table-bordered ">-->
-              <!--<tr class="text-uppercase">-->
-                  <!--<th>ID</th>-->
-                <!--<th>State</th>-->
-                <!--<th>Age</th>-->
-                <!--<th>HIV</th>-->
-                <!--<th>Diabetics</th>-->
-                <!--<th>Ebola</th>-->
-              <!--</tr>-->
-            <!--{% for record in report %}-->
-                <!--<tr>-->
-                    <!--<td>{{ record.id }}</td>-->
-                    <!--<td>{{ record.state }}</td>-->
-                    <!--<td>{{ record.age }}</td>-->
-                    <!--<td>{{ record.hiv }}</td>-->
-                    <!--<td>{{ record.diabetic }}</td>-->
-                    <!--<td>{{ record.ebola }}</td>-->
-                <!--</tr>-->
-        <!--{% endfor %}-->
-        <!--</table>-->
-        <!--</div>-->
 
-    <!--</div>-->
+                <!--<div class="form-group my-3 col-md-3">-->
+                    <!--<input class="form-control" name="health" placeholder="enter word"/>-->
+                <!--</div>-->
 
-<!--{% include "includes/pagination.html" %}-->
-<!--</div>-->
-<!--{% endblock content %}-->
-<!--{% block jquery %}-->
-    <!--<script src="{% static 'js/custom.js' %}"></script>-->
-<!--{% endblock %}-->
+                    <div class="form-group my-3 col-md-3">
+                        <button class="btn btn-success" type="submit">Filter</button>
+                    </div>
+
+        </div>
+            </form>
+    <div>
+            <h3 class="text-center font-weight-bold">LET THE DATA TELL THE STORY</h3><hr>
+            <h5 class="text-center mb-5 font-weight-bold">From the table below, we are providing you with all the statics you need to tell a story from available data</h5>
+        <div class="col-md-9 col-sm-12 table-responsive">
+        <table style="width:100%" class="table table-striped table-bordered ">
+              <tr class="text-uppercase">
+                  <th>ID</th>
+                <th>Age</th>
+                <th>Genotype</th>
+                <th>Health Challenge</th>
+                <th>Country</th>
+                <th>State</th>
+                  <th>Address</th>
+              </tr>
+            {% for record in queryset %}
+                <tr>
+                    <td>{{ record.id }}</td>
+                    <td>{{ record.age }}</td>
+                    <td>{{ record.genotype }}</td>
+                    <td>{{ record.health_challenge }}</td>
+                    <td>{{ record.country }}</td>
+                    <td>{{ record.state }}</td>
+                    <td>{{record.address}}</td>
+                </tr>
+        {% endfor %}
+        </table>
+        </div>
+
+    </div>
+
+{% include "includes/pagination.html" %}
+</div>
+{% endblock content %}
+{% block jquery %}
+    <script src="{% static 'js/custom.js' %}"></script>
+{% endblock %}

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import create_medical_record, medial_history, statistics, search, succesful
+from .views import create_medical_record, medial_history, statistics, succesful
 
 app_name = 'usersmedhistory'
 
@@ -17,8 +17,8 @@ urlpatterns = [
     # this renders a view that shows a user (s)he's  registration was successful
     path('successful/', succesful, name='success'),
 
-    # this is used for the filter view
-    path('search/<id>/', search, name="search"),
+
+
 
 
 ]
