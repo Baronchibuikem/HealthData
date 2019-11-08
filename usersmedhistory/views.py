@@ -4,15 +4,8 @@ from .forms import MedicalRecordForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.db.models import Q
-
-from django.http import HttpResponseRedirect, Http404
 
 
-
-def succesful(request):
-    # this return a success page for views that need confirmation
-    return render(request, "medicalrecord/success.html")
 
 @login_required
 def create_medical_record(request):
@@ -20,7 +13,7 @@ def create_medical_record(request):
     This view allows a user fill a form the MedicalRecordForm and if the form is
     valid, he is redirected to the success page else we render the form
     """
-    form = MedicalRecordForm(request.POST or None, request.FILES or None)
+    form = MedicalRecordForm(request.POST)
     if form.is_valid():
         instance = form.save(commit=False)
         instance.user = request.user

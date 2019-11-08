@@ -30,9 +30,9 @@ INSTALLED_APPS = [
     "user",
     'crispy_forms',
     'usersmedhistory',
-    'widget_tweaks',
 ]
 
+# ensures we are using bootstrap 4
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
@@ -129,5 +129,9 @@ MEDIA_URL = '/media/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+
+# Our custom user model
 AUTH_USER_MODEL = 'user.User'
+
+
 LOGIN_REDIRECT_URL = '/'
