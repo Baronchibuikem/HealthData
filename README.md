@@ -6,19 +6,20 @@ A web application that stores health data of its users both for HEALTH WORKERS a
 
 Key Functionalities:
 
-    An authentication system(Registration, Login and Logout) customized for 2 different type of users
-    A dynamically generated form where authenticated users can submit their health details voluntarily
-    A drop down filter functionality that allows any user to filter through available keywords
-    Series of dynamic table that displays users health details while restricting access to the users registered as patients
+    An authentication system(Registration, Login and Logout) customized for 2 different type of users.
+    A dynamically generated form where authenticated users can submit their health details voluntarily.
+    A drop down filter functionality that allows any user to filter through available keywords.
+    Series of dynamic table that displays users health details while restricting access to the users 
+    registered as patients.
 
 On the navbar:
 
-    MedStatistics shows the statistics across different users and can be further processed and analuzed to tell a story, 
-    it also has drop filter functionalities.
-    MedStore is a restricted view, only accessible to admin users and health workers and shows complete health details 
-    of all our users.
-    Medform shows a form that only authenticated users can fill inorder to help the platform keep documenting data for 
-    future educational/research/support purposes.
+    MedStatistics shows the statistics across different users and can be further processed and analuzed 
+    to tell a story, it also has drop filter functionalities.
+    MedStore is a restricted view, only accessible to admin users and health workers and shows complete 
+    health details of all our users.
+    Medform shows a form that only authenticated users can fill inorder to help the platform keep 
+    documenting data for future educational/research/support purposes.
 
 To run this web application:
 
