@@ -4,7 +4,7 @@ from .models import UserMedicalRecord, HealthChallenge, Country, LocalGovernment
 
 class UserMedicalRecordAdmin(admin.ModelAdmin):
     list_display = ['user', 'age', 'email', 'phone',
-                    'married', 'children', 'genotype', 'wife', 'address','country']
+                    'married', 'children', 'genotype', 'wife', 'health_challenge','country']
     list_filter = ['user', 'age', 'married']
     search_fields = ['user', 'email']
     list_per_page = 50

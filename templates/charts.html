@@ -1,0 +1,25 @@
+{% extends "index.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+{% block content %}
+{% endblock %}
+
+
+{% block scripts %}
+<div id="container" data-url="{% url 'usersmedhistory:chart_data' %}"></div>
+{% include "includes/defaultjsfiles.html" %}
+<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'js/popper.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/highcharts.src.js' %}"></script>
+<script>
+    $.ajax({
+        url: $("#container").attr("data-url"),
+        dataType: 'json',
+        success: function (data) {
+            Highcharts.chart("container", data);
+        }
+    });
+</script>
+{% endblock %}

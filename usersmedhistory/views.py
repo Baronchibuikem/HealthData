@@ -1,10 +1,11 @@
 from django.shortcuts import render
-from .models import UserMedicalRecord, HealthChallenge, Country,LocalGovernment, State
+from .models import UserMedicalRecord, HealthChallenge, Country, LocalGovernment, State
 from .forms import MedicalRecordForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
+from django.db.models import Q, Count
+from django.http import JsonResponse
 
 
 @login_required
@@ -48,7 +49,6 @@ def statistics(request):
     if genotype != '' and genotype is not None:
         queryset = queryset.filter(genotype__icontains=genotype)
 
-
     # For filtering out states
     state = request.GET.get('state')
     if state != '' and state is not None:
@@ -76,6 +76,36 @@ def statistics(request):
         # If page is out of range deliver last page of results
         page = paginator.page(paginator.num_pages)
 
-    context ={"queryset": queryset, 'page': page,}
+    context = {"queryset": queryset, 'page': page, }
     template = 'medicalrecord/illstatistics.html'
     return render(request, template, context)
+
+
+def age_type_view(request):
+    # dataset = UserMedicalRecord.objects.values('age').annotate(married_count=Count('age', filter=Q(married=True)),
+    #  not_married_count=Count('age', filter=Q(married=False))).order_by('age')
+    # print(dataset)
+    # return render(request, 'charts.html', {'dataset': dataset})
+    # genotype = UserMedicalRecord.objects.values("genotype")
+    # print(genotype)
+    dataset = UserMedicalRecord.objects.values("genotype")\
+                .exclude(genotype="")\
+                .annotate(total=Count("genotype"))\
+                .order_by("genotype")
+
+    genotype_name = dict()
+    print(genotype_name)
+    for genotype_tuple in UserMedicalRecord.user_choices:
+        genotype_name[genotype_tuple[0]] = genotype_tuple[1]
+
+    chart = {
+        "chart": {"type": "pie"},
+        "title": {"text": "Genotypes prone to more health Challenges"},
+        "series": [{
+            "name": "Number of Patients",
+            "data": list(map(lambda row: {"name": genotype_name[row["genotype"]],
+                                          "y":row["total"]}, dataset))
+        }]
+    }
+    print(chart)
+    return JsonResponse(chart)
