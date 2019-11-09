@@ -99,8 +99,12 @@
         });
     </script>
     {% endblock %}
-    <footer class="bg-dark text-center py-4 text-white"> This Platform was developed with love by Baron
+
+    {% block footer %}
+    <footer class="bg-dark text-center py-4 text-white">
+        This Platform was developed with love by Baron
     </footer>
+    {% endblock %}
 </body>
 
 </html>

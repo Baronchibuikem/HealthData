@@ -13,7 +13,7 @@ SECRET_KEY = 'p7&3$&gv%ig%bx6io(b7jflvlrb3s3ugd2rp8k69oh1^y%jbbg'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['datahealth4africa.herokuapp.com',"127.0.0.1"]
 
 
 # Application definition
@@ -38,6 +38,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -126,6 +127,7 @@ MEDIA_ROOT = os.path.join(os.path.join(BASE_DIR, "media/"))
 
 MEDIA_URL = '/media/'
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
