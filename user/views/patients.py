@@ -12,7 +12,6 @@ def dashboard(request):
     return render(request, template)
 
 
-
 def patient_profile_view(request):
     """
     Views that renders the PatientProfileForm for users to register as patients.
@@ -20,13 +19,8 @@ def patient_profile_view(request):
     user variable.
     The user variable then calls patientprofile which was declared in our models and saves it's
     value in a profile variable.
-
     Next we get the values fields in the form but which was only declared in the PatientProfile models
     and ensure the are validated/cleaned and then append the values to the profile variable before saving.
-
-    Next we get the values for username and password and authenticate(builtin method) them, if correct we
-    log the user in and redirect to our home page
-
     if all the fields in the form does not pass validation, we render the form to the user
     """
     next = request.GET.get('next')
@@ -45,16 +39,9 @@ def patient_profile_view(request):
             profile.user_data = user_data
             profile.save()
             messages.success(request, "Profile successfully created")
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=password)
-            login(request, user)
-            if next:
-                return redirect(next)
-            return render(request, "index.html")
+            return render(request, 'registration/register_done.html')
         else:
             print(PatientProfileForm.errors)
     else:
         form = PatientProfileForm()
     return render(request, 'registration/register.html', {'profile_form': form})
-
