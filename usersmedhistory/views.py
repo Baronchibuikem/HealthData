@@ -69,7 +69,7 @@ def statistics(request):
         queryset = queryset.filter(country__name__icontains=country)
 
     # for pagination
-    paginator = Paginator(queryset, 2)
+    paginator = Paginator(queryset, 30)
     page_number = request.GET.get('page', 1)
     try:
         page = paginator.page(page_number)
