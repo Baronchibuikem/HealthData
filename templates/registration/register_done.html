@@ -7,9 +7,13 @@
 <div class="container mt-5 pt-5">
     <div class="row pb">
         <div class="col mt-5 pt-5 text-center">
-            <h1>Welcome {{ new_user.first_name }}!</h1>
-            <p>Your account has been successfully created. Now you can <a href="{% url 'login' %}">log in</a>.</p>
+            <h1 class="display-1 mt-5 mb-2 font-weight-bold mx-auto">Welcome {{ new_user.first_name }}!</h1>
+            <h5 class="text-uppercase font-weight-bold">Your account has been successfully created. Now you can <a
+                    href="{% url 'login' %}">log in</a>.</h5>
         </div>
     </div>
 </div>
+{% endblock %}
+{% block footer %}
+
 {% endblock %}
