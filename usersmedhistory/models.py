@@ -59,7 +59,7 @@ class UserMedicalRecord(models.Model):
         ('AA', 'AA'), ('AS', "AS"), ('SS', 'SS')
     )
     condition_status = (
-        ("Contagious", "Contagious"), ("Non_contagious", "Non_contagious")
+        ("Contagious", "Contagious"), ("Non contagious", "Non contagious")
     )
     condition_stage = (
         ("Minor", "Minor"), ("Chronic", "Chronic")
@@ -75,7 +75,7 @@ class UserMedicalRecord(models.Model):
     health_challenge = models.ForeignKey(
         HealthChallenge, on_delete=models.CASCADE)
     health_status = models.CharField(
-        max_length=50, choices=condition_status, default="Non_contagious")
+        max_length=50, choices=condition_status, default="Non contagious")
     health_condition = models.CharField(
         max_length=50, choices=condition_stage, default="Minor")
     married = models.BooleanField(default=False)
