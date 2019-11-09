@@ -42,6 +42,10 @@ def medial_history(request):
 
 
 def statistics(request):
+    """
+    This view returns the list of all the records in the UserMedical record models, and also
+    allows us to filter through each field as to fetch data request for on the filtering
+    """
     queryset = UserMedicalRecord.objects.all()
 
     # For filtering out genotypes
@@ -65,7 +69,7 @@ def statistics(request):
         queryset = queryset.filter(country__name__icontains=country)
 
     # for pagination
-    paginator = Paginator(queryset, 30)
+    paginator = Paginator(queryset, 2)
     page_number = request.GET.get('page', 1)
     try:
         page = paginator.page(page_number)
@@ -76,36 +80,40 @@ def statistics(request):
         # If page is out of range deliver last page of results
         page = paginator.page(paginator.num_pages)
 
-    context = {"queryset": queryset, 'page': page, }
+    context = {"queryset": queryset, 'page': page, 'queryset': page,}
     template = 'medicalrecord/illstatistics.html'
     return render(request, template, context)
 
 
-def age_type_view(request):
-    # dataset = UserMedicalRecord.objects.values('age').annotate(married_count=Count('age', filter=Q(married=True)),
-    #  not_married_count=Count('age', filter=Q(married=False))).order_by('age')
-    # print(dataset)
-    # return render(request, 'charts.html', {'dataset': dataset})
-    # genotype = UserMedicalRecord.objects.values("genotype")
-    # print(genotype)
+
+
+
+def chart_view(request):
+    """
+    This view is used to render different charts to our users, we retrieve only the values 
+    in our genotype field, exclude any instance without a value, count the number of values
+    in the database and store in a dataset. 
+    Next we loop over the user_choices we declared in our model which is used by the genotype field
+    and then index them. 
+    Lastly we create a chart variable and using the values we got above, generate an array of objects
+    which will be used in the template.
+    """
     dataset = UserMedicalRecord.objects.values("genotype")\
                 .exclude(genotype="")\
                 .annotate(total=Count("genotype"))\
                 .order_by("genotype")
 
     genotype_name = dict()
-    print(genotype_name)
     for genotype_tuple in UserMedicalRecord.user_choices:
         genotype_name[genotype_tuple[0]] = genotype_tuple[1]
 
     chart = {
         "chart": {"type": "pie"},
-        "title": {"text": "Genotypes prone to more health Challenges"},
+        "title": {"text": "Pie chart showing different Genotypes against number of recorded Health Challenges"},
         "series": [{
             "name": "Number of Patients",
             "data": list(map(lambda row: {"name": genotype_name[row["genotype"]],
                                           "y":row["total"]}, dataset))
         }]
     }
-    print(chart)
     return JsonResponse(chart)

@@ -19,7 +19,12 @@
         </h5>
     </div>
 
-    <div id="container" class="col-md-4 " data-url="{% url 'usersmedhistory:chart_data' %}"></div>
+
+    <!-- This div renders the different charts on our page -->
+    <div id="container" class="col-md-4" data-url="{% url 'usersmedhistory:chart_data' %}"></div>
+    <!-- End of the div charts -->
+
+
     <div class="col-md-9 col-sm-12 table-responsive">
         <table style="width:100%" class="table table-striped table-bordered ">
             <tr class="text-uppercase">
@@ -129,6 +134,7 @@
     {% include "includes/pagination.html" %}
 </div>
 
+<!-- This scripts is an ajax scripts renders the different charts on our page -->
 <script>
     $.ajax({
         url: $("#container").attr("data-url"),
