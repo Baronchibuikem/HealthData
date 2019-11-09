@@ -65,16 +65,20 @@
 
 
     {% block content %}
+    <!-- this brings in the content of homepagebackground whenever the homepage is loaded -->
     {% include "includes/homepagebackground.html" %}
-    <div id="container" data-url="{% url 'usersmedhistory:chart_data' %}"></div>
+    <!-- end of homepagebackground -->
 
     {% endblock %}
-
-
-    {% include "includes/defaultjsfiles.html" %}
     {% block scripts %}
-    <script src="{% static 'js/highcharts.src.js' %}"></script>
+
     <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/highcharts.src.js' %}"></script>
+
+    <!-- this scripts are used to create the different charts in our web pages -->
+    <!-- this renders the genotype chart -->
     <script>
         $.ajax({
             url: $("#container").attr("data-url"),
@@ -84,7 +88,19 @@
             }
         });
     </script>
+    <!-- this renders the contagious and non contagious chart -->
+    <script>
+        $.ajax({
+            url: $("#status").attr("data-url"),
+            dataType: 'json',
+            success: function (data) {
+                Highcharts.chart("status", data);
+            }
+        });
+    </script>
     {% endblock %}
+    <footer class="bg-dark text-center py-4 text-white"> This Platform was developed with love by Baron
+    </footer>
 </body>
 
 </html>

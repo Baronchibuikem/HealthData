@@ -4,20 +4,22 @@
 <!-- header background -->
 <header id="header">
     <div class="container mt-5 pt-5">
-        <div class="banner text-center mt-5 pt-5">
+        <div class="banner text-center text-light mt-5 pt-5">
             {% if request.user.is_authenticated %}
-            <h1 class="text-white"><strong>HEALTH DATA COLLECTION CENTER</strong></h1>
-            <h4 class="pb-3">A health data center which holds data for both Health Practitioners and other Users</h4>
+            <h1 class="text-white"><strong>DATA HEALTH FOR AFRICAN</strong></h1>
+            <h4 class="pb-3">Changing the narrative of the Health of African People</h4>
+            {% include 'includes/Aboutus.html' %}
             {% else %}
             <h1><strong class="text-white">HEALTH DATA COLLECTION CENTER</strong></h1>
-            <h4 class="pb-3">A health data center which holds data for both Health Practitioners and other Users</h4>
-            <h4>Register as</h4>
+            <h4 class="pb-3">Changing the narrative of the Health of African People</h4>
+            <h5>Register as</h5>
             <div class="btn btn-success mr-5">
                 <a href="{% url 'user:healthworker' %}" class="p-5 text-white"> Health Worker</a>
             </div>
             <div class="btn btn-success">
                 <a href="{% url 'user:patient' %}" class="p-5 text-white">Patient</a>
             </div>
+            {% include 'includes/Aboutus.html' %}
             {% endif %}
         </div>
     </div>

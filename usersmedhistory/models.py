@@ -13,7 +13,6 @@ class HealthChallenge(models.Model):
         return self.name
 
 
-
 class Country(models.Model):
     """
     Model for admin to add list of Countries that a user is to select form
@@ -22,8 +21,6 @@ class Country(models.Model):
 
     def __str__(self):
         return self.name
-
-
 
 
 class State(models.Model):
@@ -36,7 +33,6 @@ class State(models.Model):
 
     def __str__(self):
         return self.name
-
 
 
 class LocalGovernment(models.Model):
@@ -60,7 +56,13 @@ class UserMedicalRecord(models.Model):
     are restricted to the values provided by those fields
     """
     user_choices = (
-        ('AA', 'AA'), ('AS', "AS"),('SS', 'SS')
+        ('AA', 'AA'), ('AS', "AS"), ('SS', 'SS')
+    )
+    condition_status = (
+        ("Contagious", "Contagious"), ("Non_contagious", "Non_contagious")
+    )
+    condition_stage = (
+        ("Minor", "Minor"), ("Chronic", "Chronic")
     )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     age = models.IntegerField()
@@ -68,13 +70,19 @@ class UserMedicalRecord(models.Model):
     phone = models.IntegerField(blank=True, null=True)
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
     state = models.ForeignKey(State, on_delete=models.CASCADE)
-    local_government = models.ForeignKey(LocalGovernment, on_delete=models.CASCADE)
-    health_challenge = models.ForeignKey(HealthChallenge, on_delete=models.CASCADE)
+    local_government = models.ForeignKey(
+        LocalGovernment, on_delete=models.CASCADE)
+    health_challenge = models.ForeignKey(
+        HealthChallenge, on_delete=models.CASCADE)
+    health_status = models.CharField(
+        max_length=50, choices=condition_status, default="Non_contagious")
+    health_condition = models.CharField(
+        max_length=50, choices=condition_stage, default="Minor")
     married = models.BooleanField(default=False)
     children = models.IntegerField(blank=True, null=True)
     wife = models.IntegerField(blank=True, null=True)
     address = models.CharField(max_length=250, blank=True, null=True)
-    genotype = models.CharField(max_length=2, choices=user_choices)
+    genotype = models.CharField(max_length=50, choices=user_choices)
     date = models.DateField(auto_now_add=True)
 
     class Meta:
@@ -82,5 +90,3 @@ class UserMedicalRecord(models.Model):
 
     def __str__(self):
         return self.user.username
-
-

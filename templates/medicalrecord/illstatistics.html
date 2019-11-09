@@ -4,9 +4,6 @@
 
 
 {% block content %}
-<!-- this html page is used to display a list of queried fields from the UserMedicalRecord and allows users to perform queries on them -->
-
-
 <div class="container mx-auto row mt-5 pt-5">
 
     <div class="mb-4">
@@ -19,12 +16,12 @@
         </h5>
     </div>
 
-
     <!-- This div renders the different charts on our page -->
     <div id="container" class="col-md-4" data-url="{% url 'usersmedhistory:chart_data' %}"></div>
-    <!-- End of the div charts -->
+    <div id="status" class="col-md-5" data-url="{% url 'usersmedhistory:condition_data' %}"></div>
+    <!-- end of the chart div -->
 
-
+    <!-- This renders the table containing details of users who submitted the medform -->
     <div class="col-md-9 col-sm-12 table-responsive">
         <table style="width:100%" class="table table-striped table-bordered ">
             <tr class="text-uppercase">
@@ -52,7 +49,9 @@
             {% endfor %}
         </table>
     </div>
+    <!-- End of list of users who submoitted the medform -->
 
+    <!-- This renders the filtering options -->
     <div class="col-md-3 col-sm-12">
         <form method="GET" class="mb-5 shadow font-weight-bold h5 text-uppercase">
             <div class="row">
@@ -130,18 +129,11 @@
             </div>
         </form>
     </div>
+    <!-- End of filtering form options -->
+
 
     {% include "includes/pagination.html" %}
 </div>
 
-<!-- This scripts is an ajax scripts renders the different charts on our page -->
-<script>
-    $.ajax({
-        url: $("#container").attr("data-url"),
-        dataType: 'json',
-        success: function (data) {
-            Highcharts.chart("container", data);
-        }
-    });
-</script>
+
 {% endblock content %}

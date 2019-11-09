@@ -11,6 +11,6 @@
 .banner {
   margin-top: 400px;
 }
-ul {
-  list-style: none !important;
+.vh {
+  min-height: 100%;
 }

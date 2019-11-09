@@ -36,7 +36,17 @@ def medial_history(request):
     if request.user.is_anonymous or request.user.is_patient:
         return render(request, "medicalrecord/permission_denied.html")
     object = UserMedicalRecord.objects.all()
-    context = {'records': object}
+    paginator = Paginator(object, 30)
+    page_number = request.GET.get('page', 1)
+    try:
+        page = paginator.page(page_number)
+    except PageNotAnInteger:
+        # If page is not an integer deliver the first page
+        page = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range deliver last page of results
+        page = paginator.page(paginator.num_pages)
+    context = {'page': page, 'records': page, }
     template = "medicalrecord/medicalhistory.html"
     return render(request, template, context)
 
@@ -80,12 +90,9 @@ def statistics(request):
         # If page is out of range deliver last page of results
         page = paginator.page(paginator.num_pages)
 
-    context = {"queryset": queryset, 'page': page, 'queryset': page,}
+    context = {"queryset": queryset, 'page': page, 'queryset': page, }
     template = 'medicalrecord/illstatistics.html'
     return render(request, template, context)
-
-
-
 
 
 def chart_view(request):
@@ -99,9 +106,9 @@ def chart_view(request):
     which will be used in the template.
     """
     dataset = UserMedicalRecord.objects.values("genotype")\
-                .exclude(genotype="")\
-                .annotate(total=Count("genotype"))\
-                .order_by("genotype")
+        .exclude(genotype="")\
+        .annotate(total=Count("genotype"))\
+        .order_by("genotype")
 
     genotype_name = dict()
     for genotype_tuple in UserMedicalRecord.user_choices:
@@ -117,3 +124,34 @@ def chart_view(request):
         }]
     }
     return JsonResponse(chart)
+
+
+def condition_status_view(request):
+    """
+    This view is used to render the contagious and non_contagious charts to our users, we retrieve only the values 
+    in our health_status field, exclude any instance without a value, count the number of values
+    in the database and store in a dataset. 
+    Next we loop over the consition_status we declared in our model which is used by the health_status field
+    and then index them. 
+    Lastly we create a healthchart variable and using the values we got above, generate an array of objects
+    which will be used in the template.
+    """
+    dataset = UserMedicalRecord.objects.values("health_status")\
+        .exclude(health_status="")\
+        .annotate(total=Count("health_status"))\
+        .order_by("health_status")
+
+    health_name = dict()
+    for health_tuple in UserMedicalRecord.condition_status:
+        health_name[health_tuple[0]] = health_tuple[1]
+
+    healthchart = {
+        "chart": {"type": "pie"},
+        "title": {"text": "Graphical representation of number of patients with either contagious or non contagious disease"},
+        "series": [{
+            "name": "Number of Patients",
+            "data": list(map(lambda row: {"name": health_name[row["health_status"]],
+                                          "y":row["total"]}, dataset))
+        }]
+    }
+    return JsonResponse(healthchart)
