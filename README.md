@@ -63,3 +63,5 @@ NOTE: on dropdown filtering functionality
     and the filtering functionality will automatically detect it.
 
 Thanks for checking out this web application and it is open for further improvement.
+
+Demo: http://datahealth4africa.herokuapp.com/
