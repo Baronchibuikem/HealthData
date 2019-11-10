@@ -19,17 +19,18 @@ Key Functionalities:
 
 On the navbar:
 
-    MedStatistics shows the statistics across different users and can be further processed and analuzed
-    to tell a story, it also has drop filter functionalities.
+    MedStatistics shows the statistics across different users and can be used for Research, Educational or
+    Aid purposes, it also has dropdown filter functionalities.
+
     MedStore is a restricted view, only accessible to admin users and health workers and shows complete
-    health details of all our users.
+    health details of all the users that has submitted a medical form.
+
     Medform shows a form that only authenticated users can fill inorder to help the platform keep
     documenting data for future educational/research/support purposes.
 
 To run this web application:
 
-    Create a new folder
-    We highly advise you setup a virtual environment and have it activate it inside that folder
+    Create a new folder and set up your virtual environment inside and activate it
     git clone https://github.com/Baronchibuikem/HealthData
     cd HealthData
     pip install -r requirements.txt
@@ -45,12 +46,12 @@ NOTE: on migrations
 
     It is very important you run "python manage.py makemigration user" and "python manage.py migrate user"
     before running the general "python manage.py migrate" because we are using our own custom User model
-    and we want that to be want will be detected in the database aainst using the default django User model.
+    and we want that to be want will be registered in the database aainst using the default django User model.
 
 NOTE: on relationships
 
     Alot of fields especially in our Medform is dependent(has a foreignKey relationship) to other fields
-    like Country, State, Local Government, Health Challenge, so as a superuser, you will have to create
+    like Country, State, Health Challenge, so as a superuser, you will have to create
     data's for this fields in the admin dashboard which will now be accessible to users to choose from
     in the medform.
 
