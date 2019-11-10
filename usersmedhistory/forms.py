@@ -11,4 +11,4 @@ class MedicalRecordForm(forms.ModelForm):
     """
     class Meta:
         model = UserMedicalRecord
-        fields = ['age', 'email', 'phone', 'country','state', 'local_government','health_challenge', 'married', 'children', 'wife', 'address', 'genotype']
+        fields = ['age', 'email', 'phone', 'country','state', 'health_challenge','health_status','health_condition', 'married', 'address', 'genotype']

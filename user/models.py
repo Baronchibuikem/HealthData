@@ -13,8 +13,8 @@ class User(AbstractUser):
     users especially when creating multiple registration portal form them, this also allows us to grant access
     to any type of user we want
     """
-    is_healthworker = models.BooleanField(default=True)
-    is_patient = models.BooleanField(default=True)
+    is_healthworker = models.BooleanField(default=False, null=False)
+    is_patient = models.BooleanField(default=False, null=False)
 
 
     

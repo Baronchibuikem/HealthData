@@ -16,7 +16,7 @@ class PatientProfileForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ("username", 'first_name', 'last_name', 'email','user_type', 'phone_number', 'location' ,'password1', 'password2')
+        fields = ("username", 'first_name', 'last_name', 'email','user_type','is_patient', 'phone_number', 'location' ,'password1', 'password2')
 
 
 class HealthWorkerProfileForm(UserCreationForm):

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import UserMedicalRecord, HealthChallenge, Country, LocalGovernment, State
+from .models import UserMedicalRecord, HealthChallenge, Country, State
 from .forms import MedicalRecordForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required

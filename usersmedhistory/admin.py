@@ -1,10 +1,10 @@
 from django.contrib import admin
-from .models import UserMedicalRecord, HealthChallenge, Country, LocalGovernment, State
+from .models import UserMedicalRecord, HealthChallenge, Country,State
 
 
 class UserMedicalRecordAdmin(admin.ModelAdmin):
     list_display = ['user', 'age', 'email', 'phone',
-                    'married', 'children', 'genotype', 'wife', 'health_challenge',"health_status", 'state','country']
+                    'married',  'genotype', 'health_challenge',"health_status", 'state','country']
     list_filter = ['genotype', 'married','health_challenge',"health_status", 'state','country']
     search_fields = ['user', 'email']
     list_per_page = 50
@@ -23,12 +23,6 @@ class StateAdmin(admin.ModelAdmin):
     list_per_page = 50
     search_fields = ['name',]
 
-class LocalGovernmentAdmin(admin.ModelAdmin):
-    list_display = ['name','country','state' ]
-    list_filter = ['name', 'country','state' ]
-    list_per_page = 50
-    search_fields = ['name','country','state'  ]
-
 class HealthChallengeAdmin(admin.ModelAdmin):
     list_display = ['name']
     list_filter = ['name']
@@ -38,5 +32,4 @@ class HealthChallengeAdmin(admin.ModelAdmin):
 admin.site.register(HealthChallenge, HealthChallengeAdmin)
 admin.site.register(Country, CountryAdmin)
 admin.site.register(State, StateAdmin)
-admin.site.register(LocalGovernment, LocalGovernmentAdmin)
 admin.site.register(UserMedicalRecord, UserMedicalRecordAdmin)

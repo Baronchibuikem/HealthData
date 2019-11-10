@@ -31,19 +31,8 @@ class State(models.Model):
     name = models.CharField(max_length=50)
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.name
-
-
-class LocalGovernment(models.Model):
-    """
-    Model for admin to add list of local governments that a user is to select form and it has
-    a foriegnkey to country and state which means only listed countries in the Country models
-    and states in the State model can be selected
-    """
-    name = models.CharField(max_length=50)
-    country = models.ForeignKey(Country, on_delete=models.CASCADE)
-    state = models.ForeignKey(State, on_delete=models.CASCADE)
+    class Meta:
+        ordering = ('name',)
 
     def __str__(self):
         return self.name
@@ -59,7 +48,7 @@ class UserMedicalRecord(models.Model):
         ('AA', 'AA'), ('AS', "AS"), ('SS', 'SS')
     )
     condition_status = (
-        ("Contagious", "Contagious"), ("Non contagious", "Non contagious")
+        ("Contagious", "Contagious"), ("Non Contagious", "Non Contagious")
     )
     condition_stage = (
         ("Minor", "Minor"), ("Chronic", "Chronic")
@@ -70,17 +59,13 @@ class UserMedicalRecord(models.Model):
     phone = models.IntegerField(blank=True, null=True)
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
     state = models.ForeignKey(State, on_delete=models.CASCADE)
-    local_government = models.ForeignKey(
-        LocalGovernment, on_delete=models.CASCADE)
     health_challenge = models.ForeignKey(
         HealthChallenge, on_delete=models.CASCADE)
     health_status = models.CharField(
-        max_length=50, choices=condition_status, default="Non contagious")
+        max_length=50, choices=condition_status, default="Non Contagious")
     health_condition = models.CharField(
         max_length=50, choices=condition_stage, default="Minor")
     married = models.BooleanField(default=False)
-    children = models.IntegerField(blank=True, null=True)
-    wife = models.IntegerField(blank=True, null=True)
     address = models.CharField(max_length=250, blank=True, null=True)
     genotype = models.CharField(max_length=50, choices=user_choices)
     date = models.DateField(auto_now_add=True)

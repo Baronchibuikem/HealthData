@@ -31,7 +31,7 @@ def healthworker_profile_view(request):
             profile.organization_name = organization_name
             profile.save()
             messages.success(request, "Profile successfully created")
-            return render(request, 'registration/register_done.html', {'profile_form': form})
+            return render(request, 'registration/register_done.html')
         else:
             print(HealthWorkerProfileForm.errors)
     else:
